@@ -2,7 +2,7 @@
 
 Bem-vindo ao Sistema de Gerenciamento de Loja de Roupas! Este é um aplicativo full-stack projetado para ajudar a gerenciar inventário de roupas, vendas, clientes e pedidos de forma eficiente. O projeto é construído com React no front-end, Python no back-end, e MySQL para o banco de dados.
 
-## Funcionalidades
+## 🔨 Funcionalidades
 
 - Gerenciamento de Produtos: Adicionar, editar, excluir e visualizar produtos no inventário.
 - Gerenciamento de Pedidos: Gerenciar pedidos de clientes, rastrear status e atualizar detalhes de entrega.
@@ -12,30 +12,44 @@ Bem-vindo ao Sistema de Gerenciamento de Loja de Roupas! Este é um aplicativo f
 - Autenticação de Usuários: Sistema de login seguro com acesso baseado em funções (admin, equipe de vendas).
 - Design Responsivo: Acessível em diferentes dispositivos, incluindo desktops e celulares.
 
-## Tecnologias Utilizadas
-
-### Front-End:
+## 🛠️ Tecnologias Utilizadas
 
 - React - Uma biblioteca JavaScript para construir interfaces de usuário
 - React Router - Para navegação e roteamento
 - Axios - Para fazer requisições HTTP à API
 - TailwindCSS - Framework CSS baseado em utilitários para estilização
 
-## Uso
+## 💡 Instalação
 
-- Login: Use as credenciais de administrador para acessar o painel de controle.
-- Gerenciar Produtos: Navegue até a seção "Produtos" para adicionar novos itens, editar ou remover produtos existentes.
-- Gerenciar Pedidos: Visualize e processe pedidos de clientes.
-- Gerar Relatórios de Vendas: Vá até a seção "Relatórios" para gerar e baixar relatórios de vendas.
-- Gerenciar Clientes: Visualize a lista de clientes e edite seus detalhes conforme necessário.
-
-## Instalação
-
-1- Clone o repositório:
+1. Clone o repositório:
 
 `git clone https://github.com/JamilleSM/lady-store.git`
 
-2- Instale as dependências:
+ 2.  Navegue até o diretório do projeto 
 
 `cd lady-store`
-`npm install`
+
+3. Se estiver utilizando uma IDE, abra o terminal e execute os seguintes comandos para inicializar o projeto:
+
+```
+npm install
+npm run dev
+
+```
+
+
+##  🚀 Como Utilizar o Sistema 
+
+1. Acesse a aplicação: Abra o navegador e vá para [http://localhost:5174 ](http://localhost:5174/)(ou a porta que estiver configurada).
+
+2. Clique no botão de produtos para navegar até a tela de listagem de produtos 
+[Pagina de listar produtos ](C:\Users\hiali\Documents\ladystore\lady-store\src\assets\botao_novo_produto.png)  
+
+
+3. Para casdastrar novo produto clique me "Novo Produto" para navegar até a página de cadastro de produto 
+[Botào de cadastrar produto](C:\Users\hiali\Documents\ladystore\lady-store\src\assets\botao_novo_produto.png)  
+
+4. Para casdastrar novo produto clique me "Novo Produto" para navegar até a página de cadastro de cliente  
+
+5. Para casdastrar novo produto clique me "Novo Produto" para navegar até a página de cadastro de cliente  
+

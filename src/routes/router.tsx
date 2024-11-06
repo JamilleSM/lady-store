@@ -3,7 +3,7 @@ import CadastrarProduto from "../pages/cadrastrar-produto/cadrastrar-produto";
 import CadastrarCliente from "../pages/cadrastrar-cliente/cadrastrar-cliente";
 import Produto from "../pages/produtos/produtos";
 import Cliente from "../pages/clientes/clientes";
-import Home from "../pages/home/Home";
+import Home from '../pages/Home/Home'
 
 
 const Rotas = () => {
