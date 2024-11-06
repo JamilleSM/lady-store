@@ -42,14 +42,11 @@ npm run dev
 
 1. Acesse a aplicação: Abra o navegador e vá para [http://localhost:5174 ](http://localhost:5174/)(ou a porta que estiver configurada).
 
-2. Clique no botão de produtos para navegar até a tela de listagem de produtos 
-[Pagina de listar produtos ](C:\Users\hiali\Documents\ladystore\lady-store\src\assets\botao_novo_produto.png)  
+2. Clique no botão de "Produtos" para navegar até a tela de listagem de produtos. 
 
+3. Para cadastrar novo produto clique me "Novo Produto" para navegar até a página de cadastro de produto.
+ 
+4. Clique no botão de "Clientes" para navegar até a tela de listagem de produtos.
 
-3. Para casdastrar novo produto clique me "Novo Produto" para navegar até a página de cadastro de produto 
-[Botào de cadastrar produto](C:\Users\hiali\Documents\ladystore\lady-store\src\assets\botao_novo_produto.png)  
-
-4. Para casdastrar novo produto clique me "Novo Produto" para navegar até a página de cadastro de cliente  
-
-5. Para casdastrar novo produto clique me "Novo Produto" para navegar até a página de cadastro de cliente  
+5. Para cadastrar novo cliente clique me "Novo Cliente" para navegar até a página de cadastro de cliente. 
 
