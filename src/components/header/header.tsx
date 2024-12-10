@@ -1,34 +1,29 @@
 import './header.scss'
 import { ChevronsRight, Bell } from 'react-feather';
-import Badge from '@mui/material/Badge';
 
-interface HeaderProps {
-   user?: string
+
+interface headerProps {
+   date: Date;
+   user: string
 }
 
-function Header({user}: HeaderProps){
-   const dataAtual = new Date().toLocaleDateString('pt-BR', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    });
-
+function Header({date, user}: headerProps){
    return(
       <>
       <div className="container-header">
-         <div className='data'>
+         <div className='data-container'>
             <ChevronsRight  size={16} color='#666666'/>
-            <span>{dataAtual}</span>
+            <p>{date.toLocaleDateString()}</p>
          </div>
-         <div className='user'>
+         <div className='user-container'>
              <p>Bem vindo(a), {user}</p>
-             <Badge variant="dot" color="secondary" sx={{cursor: 'pointer'}} >
-               <Bell size={20} color='#9F9F9F'/>
-            </Badge>
-         </div>  
+             <Bell size={20} color='#191919' />
+
+         </div>
       </div>
       </>
    )
+   
 }
 
 export default Header;
