@@ -1,0 +1,92 @@
+.container {
+   display: flex;
+   height: 100vh;
+   width: 100%;
+ }
+
+.image-container {
+   flex: 1;
+   display: flex;
+   img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover; 
+      }
+
+}
+
+ .login-forms {
+   flex: 1;
+   display: flex;
+   gap: 32px;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 20px;
+   background-color: #ffffff;
+ }
+
+
+ .header {
+   h1 {
+      font-size: 42px;
+      font-weight: 500;
+      color: #333333;
+   }
+
+   p {
+      font-size: 32px;
+      font-weight: 400;
+      color: #333333;
+   }
+}
+
+.label {
+   font-size: 24px;
+   color: #666666;
+
+}
+
+.label-senha{
+   display: flex;
+   justify-content: space-between;
+} 
+
+.hide {
+   display: flex;
+   align-items: center;
+   gap: 6px;
+}
+
+
+.termos {
+   font-size: 18px;
+   color: #666666;
+}
+
+.link{
+   text-decoration: underline;
+   color: #111111 ;
+}
+
+
+.botao-entrar {
+   color: #ffff;
+   font-weight: 700;
+   font-size: 18;
+   background-color: #FF698D;
+   padding: 16px;
+   width: 210px;
+   height: 68px;
+   border-radius: 50px ;
+}
+
+input {
+   width: 473px;
+   height: 56px;
+   border: 1px solid #66666659;
+   font-size: 16px;
+   border-radius: 16px;
+   padding: 8px; 
+ }
+ 

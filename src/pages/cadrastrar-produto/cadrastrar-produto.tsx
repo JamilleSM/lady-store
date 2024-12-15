@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast, ToastContainer } from 'react-toastify';
 import { Product } from "../../interface/product.interface";
-import Button from "../../ui/components/button/button";
-import Cadastro from "../../ui/components/cadastro/cadastro";
-import Input from "../../ui/components/input/input";
-import SideNav from "../../ui/components/sidenav/sidenav";
+import Button from "../../components/button/button";
+import Cadastro from "../../components/cadastro/cadastro";
+import Input from "../../components/input/input";
+import SideNav from "../../components/sidenav/sidenav";
 import { getProductById, setProduct, updateProduct } from '../../data/services/product.service';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -39,17 +39,19 @@ function CadastrarProduto() {
     }
 
     const updateProduto = async (data: Product) => {
-        if (id) await updateProduct(id, data);
+        if (id) return await updateProduct(id, data);
     }
 
     const onSubmit = async (data: Product) => {
         if(id) {
-            await updateProduto(data);
+            const response = await updateProduto(data);
+            console.log(response)
             toast.success('Produto atualizado com sucesso!');
             navigate('/produtos');
         } else {
             await setProduto(data);
             toast.success('Produto cadastrado com sucesso!');
+            navigate('/produtos');
             reset();
         }
     }
