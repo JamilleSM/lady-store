@@ -79,7 +79,7 @@ function Cliente() {
         <div className='container-clientes'>
             <SideNav />
             <div>
-                <Header />
+                <Header date={new Date()} user={''} />
                 <div className='container-pesquisa-inputs'>
                     <Pesquisa 
                         title='Clientes' 

@@ -3,14 +3,16 @@ import CadastrarProduto from "../pages/cadrastrar-produto/cadrastrar-produto";
 import CadastrarCliente from "../pages/cadrastrar-cliente/cadrastrar-cliente";
 import Produto from "../pages/produtos/produtos";
 import Cliente from "../pages/clientes/clientes";
-import Home from "../pages/home/home";
+import Home from "../pages/Home/Home";
+import Login from "../pages/login/login";
 
 
 const Rotas = () => {
   return(
       <BrowserRouter>
       <Routes>
-          <Route path="/" element={ <Home /> } />
+          <Route path="/" element={ <Login/> } />
+          <Route path="/home" element={ <Home /> } />
           <Route path="/produtos" element={ <Produto /> } />
           <Route path="/clientes" element={ <Cliente /> } />
           <Route path="/cadastrar-produto" element={ <CadastrarProduto /> } />
