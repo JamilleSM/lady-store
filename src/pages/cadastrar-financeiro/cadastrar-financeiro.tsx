@@ -105,7 +105,7 @@ function CadastrarFinanceiro({ financialId, onCloseModal }: CadastrarFinanceiroP
                 <Select label='Tipo de operação' placeholder='Selecione uma tipo' maps={operationOptions} {...register('transaction_type')} error={errors.transaction_type?.message} />
                 <Input label='Valor' placeholder='Ex.: Gola Polo' type='text' {...register('amount')} error={errors.amount?.message} />
                 <Input label='Descrição' placeholder='Ex.: Adidas' type='text' {...register('description')} error={errors.description?.message} />
-                <Select label='Observação do produto' placeholder='Selecione um' maps={saleOptions} {...register('sale_id')} error={errors.sale_id?.message} />
+                <Select label='Venda' placeholder='Selecione um' maps={saleOptions} {...register('sale_id')} error={errors.sale_id?.message} />
 
                 <Button icon={financialId ? "Activity" : "PlusCircle"} title={financialId ? "Atualizar" : "Cadastrar"} className="btn-financeiro" onPress={handleSubmit(onSubmit)} />
             </Cadastro>
