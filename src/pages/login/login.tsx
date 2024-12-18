@@ -23,6 +23,7 @@ function Login() {
       navigate('/home')
     }
   };
+  
 
   return (
     <>
@@ -39,7 +40,7 @@ function Login() {
 
           <div className='forms'>
             <p className='label'>Email</p>
-            <input type='email' />
+            <input type='email' required/>
             <div className='label-senha'>
               <p className='label'>Senha</p>
               <div onClick={handleHide} className='hide'>
@@ -51,7 +52,7 @@ function Login() {
                 <p className='label'>Hide</p>
               </div>
             </div>
-            <input type={passwordVisible ? 'text' : 'password'}/>
+            <input type={passwordVisible ? 'text' : 'password'} required minLength={8} maxLength={20}/>
           </div>
 
           <p className='termos'>
