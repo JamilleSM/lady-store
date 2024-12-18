@@ -1,28 +1,27 @@
-import { Filters } from "../../interface/filters/product-filters.interface";
 import { Product } from "../../interface/product.interface";
-import api from "./api";
+import api from "../api";
 
-export async function getProduct(filters: Filters) {
-    const response = await api.get('product', {params: {...filters}});
+export async function getProduct() {
+    const response = await api.get('product');
     return response.data;
 }
 
 export async function getProductById(id: number | string) {
-    const response = await api.get(`product/one/${id}`);
+    const response = await api.get(`product/${id}`);
     return response.data;
 }
 
 export async function setProduct(data: Product) {
-    const response = await api.post('product/create', data);
+    const response = await api.post('product/', data);
     return response;
 }
 
 export async function updateProduct(id: number | string, data: Product) {
-    const response = await api.patch(`product/update/${id}`, data);
+    const response = await api.put(`product/${id}`, data);
     return response;
 }
 
-export async function deleteProduct(id: number) {
-    const response = await api.delete(`product/delete/${id}`);
+export async function deleteProduct(id: number | string) {
+    const response = await api.delete(`product/${id}`);
     return response;
 }

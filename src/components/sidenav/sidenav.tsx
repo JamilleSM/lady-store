@@ -1,43 +1,110 @@
-import { Outlet, Link } from "react-router-dom";
-import "./sidenav.scss"
-import { Grid } from 'react-feather';
-import { Briefcase } from 'react-feather';
-import { User } from 'react-feather';
-import { Settings } from 'react-feather';
-import { LogOut } from 'react-feather';
+import { Outlet, NavLink } from "react-router-dom";
+import { Grid, Briefcase, User, Users, LogOut, CreditCard, ShoppingBag, Archive } from "react-feather";
+import "./sidenav.scss";
 
-function SideNav() {
+interface SideNavProps {
+    handleNavigation: (path: string) => void;
+}
 
+function SideNav({ handleNavigation }: SideNavProps) {
     return (
-        <>
-          <div className="container-sidenav">
+        <div className="container-sidenav">
             <img src="src/assets/logo-ladystore.png" alt="Logo" />
             <div className="link-navs">
-                <div className="nav-icon">
-                    <Grid size={24} color='#ffffff'/>
-                    <Link to='/'>Dashboard</Link>
+                <div className={`nav-icon`}>
+                    <NavLink
+                        to="/home"
+                        onClick={() => handleNavigation('/home')}
+                        className={({ isActive }) =>
+                            isActive ? "nav-icon active" : "nav-icon"
+                        }
+                    >
+                        <Grid size={24} color="#ffffff" />
+                        Dashboard
+                    </NavLink>
                 </div>
-                <div className="nav-icon">
-                    <Briefcase size={24} color='#ffffff'/>
-                    <Link to='/produtos'>Produtos</Link>
+                <div className={`nav-icon`}>
+                    <NavLink
+                        to="/produtos"
+                        onClick={() => handleNavigation('/produtos')}
+                        className={({ isActive }) =>
+                            isActive ? "nav-icon active" : "nav-icon"
+                        }
+                    >
+                        <Briefcase size={24} color="#ffffff" />
+                        Produtos
+                    </NavLink>
                 </div>
-                <div className="nav-icon">
-                    <User size={24} color='#ffffff'/>
-                    <Link to='/clientes'>Clientes</Link>
-                </div>  
-                <div className="nav-icon">
-                    <Settings size={24} color='#ffffff'/>
-                    <Link to='/'>Settings</Link>
-                </div> 
+                <div className={`nav-icon`}>
+                    <NavLink
+                        to="/clientes"
+                        onClick={() => handleNavigation('/clientes')}
+                        className={({ isActive }) =>
+                            isActive ? "nav-icon active" : "nav-icon"
+                        }
+                    >
+                        <Users size={24} color="#ffffff" />
+                        Clientes
+                    </NavLink>
+                </div>
+                <div className={`nav-icon`}>
+                    <NavLink
+                        to="/financeiro"
+                        onClick={() => handleNavigation('/financeiro')}
+                        className={({ isActive }) =>
+                            isActive ? "nav-icon active" : "nav-icon"
+                        }
+                    >
+                        <CreditCard size={24} color="#ffffff" />
+                        Financeiro
+                    </NavLink>
+                </div>
+                <div className={`nav-icon`}>
+                    <NavLink
+                        to="/estoque"
+                        onClick={() => handleNavigation('/estoque')}
+                        className={({ isActive }) =>
+                            isActive ? "nav-icon active" : "nav-icon"
+                        }
+                    >
+                        <Archive size={24} color="#ffffff" />
+                        Estoque
+                    </NavLink>
+                </div>
+                <div className={`nav-icon`}>
+                    <NavLink
+                        to="/fornecedor"
+                        onClick={() => handleNavigation('/fornecedor')}
+                        className={({ isActive }) =>
+                            isActive ? "nav-icon active" : "nav-icon"
+                        }
+                    >
+                        <User size={24} color="#ffffff" />
+                        Fornecedor
+                    </NavLink>
+                </div>
+                <div className={`nav-icon`}>
+                    <NavLink
+                        to="/vendas"
+                        onClick={() => handleNavigation('/vendas')}
+                        className={({ isActive }) =>
+                            isActive ? "nav-icon active" : "nav-icon"
+                        }
+                    >
+                        <ShoppingBag size={24} color="#ffffff" />
+                        Vendas
+                    </NavLink>
+                </div>
                 <div className="nav-icon logout">
-                    <LogOut size={24} color='#ffffff'/>
-                    <Link to='/logout'>Logout</Link>
-                </div>  
+                    <NavLink to="/logout">
+                    <LogOut size={24} color="#ffffff" />
+                    Logout
+                    </NavLink>
+                </div>
             </div>
-          </div>
-          <Outlet />
-        </>
-    )
+            <Outlet />
+        </div>
+    );
 }
 
 export default SideNav;

@@ -1,0 +1,28 @@
+.container-transactions {
+    background-color: #fff;
+    border-radius: 8px;
+    width: 400px;
+
+    .contents-transactions {
+        border-bottom: 1px solid #F3F3F3;
+        padding: 24px;
+
+        .transactions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            p {
+                color: #191919;
+                font-weight: 600;
+                font-size: 18px;
+            }
+
+            span {
+                color: #9F9F9F;
+                font-size: 14px;
+                font-weight: 500;
+            }
+        }
+    }
+}

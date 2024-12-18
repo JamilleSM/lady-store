@@ -51,7 +51,7 @@ function Login() {
                 <p className='label'>Hide</p>
               </div>
             </div>
-            <input type={passwordVisible ? 'text' : 'password'} />
+            <input type={passwordVisible ? 'text' : 'password'}/>
           </div>
 
           <p className='termos'>

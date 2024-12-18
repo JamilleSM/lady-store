@@ -1,27 +1,66 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CadastrarProduto from "../pages/cadrastrar-produto/cadrastrar-produto";
-import CadastrarCliente from "../pages/cadrastrar-cliente/cadrastrar-cliente";
-import Produto from "../pages/produtos/produtos";
-import Cliente from "../pages/clientes/clientes";
-import Home from "../pages/Home/Home";
-import Login from "../pages/login/login";
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import Produto from '../pages/produtos/produtos';
+import Cliente from '../pages/clientes/clientes';
+import Home from '../pages/Home/Home';
+import SideNav from '../components/sidenav/sidenav';
+import Financeiro from '../pages/financeiro/financeiro';
+import Estoque from '../pages/estoque/estoque';
+import Fornecedor from '../pages/fornecedor/fornecedor';
+import Login from '../pages/login/login';
 
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+  return <div>{children}</div>;
+};
+
+const MainLayout = ({
+  children,
+  handleNavigation,
+}: {
+  children: React.ReactNode;
+  handleNavigation: (path: string) => void;
+}) => {
+  return (
+    <div style={{ display: 'flex' }}>
+      <SideNav handleNavigation={handleNavigation} />
+      {children}
+    </div>
+  );
+};
 
 const Rotas = () => {
-  return(
-      <BrowserRouter>
-      <Routes>
-          <Route path="/" element={ <Login/> } />
-          <Route path="/home" element={ <Home /> } />
-          <Route path="/produtos" element={ <Produto /> } />
-          <Route path="/clientes" element={ <Cliente /> } />
-          <Route path="/cadastrar-produto" element={ <CadastrarProduto /> } />
-          <Route path="/cadastrar-produto/:id" element={ <CadastrarProduto /> } />
-          <Route path="/cadastrar-cliente" element={ <CadastrarCliente /> } />
-          <Route path="/cadastrar-cliente/:id" element={<CadastrarCliente />} />
-      </Routes>
-      </BrowserRouter>
-  )
-}
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
+  return (
+    <Routes>
+      <Route
+        path='/'
+        element={
+          <AuthLayout>
+            <Login />
+          </AuthLayout>
+        }
+      />
+      <Route
+        path='/*'
+        element={
+          <MainLayout handleNavigation={handleNavigation}>
+            <Routes>
+              <Route path='/home' element={<Home />} />
+              <Route path='/produtos' element={<Produto />} />
+              <Route path='/clientes' element={<Cliente />} />
+              <Route path='/financeiro' element={<Financeiro />} />
+              <Route path='/estoque' element={<Estoque />} />
+              <Route path='/fornecedor' element={<Fornecedor />} />
+            </Routes>
+          </MainLayout>
+        }
+      />
+    </Routes>
+  );
+};
 
 export default Rotas;
