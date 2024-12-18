@@ -1,28 +1,27 @@
 import { Customer } from "../../interface/customer.interface";
-import { Filters } from "../../interface/filters/customer-filters.interface";
-import api from "./api";
+import api from "../api";
 
-export async function getCustomer(filters: Filters) {
-    const response = await api.get('customer', {params: {...filters}});
+export async function getCustomer() {
+    const response = await api.get('customer');
     return response.data;
 }
 
 export async function getCustomerById(id: number | string) {
-    const response = await api.get(`customer/one/${id}`);
+    const response = await api.get(`customer/${id}`);
     return response.data;
 }
 
 export async function setCustomer(data: Customer) {
-    const response = await api.post('customer/create', data);
+    const response = await api.post('customer/', data);
     return response;
 }
 
 export async function updateCustomer(id: number | string, data: Customer) {
-    const response = await api.patch(`customer/update/${id}`, data);
+    const response = await api.put(`customer/${id}`, data);
     return response;
 }
 
-export async function deleteCustomer(id: number) {
-    const response = await api.delete(`customer/delete/${id}`);
+export async function deleteCustomer(id: number | string) {
+    const response = await api.delete(`customer/${id}`);
     return response;
 }

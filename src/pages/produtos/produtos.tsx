@@ -1,38 +1,28 @@
 import './produtos.scss';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Table, { Coluna } from "../../components/table/table";
 import Header from "../../components/header/header";
-import { Box, Pagination } from "@mui/material";
-import SideNav from '../../components/sidenav/sidenav';
+import { Pagination } from "@mui/material";
 import Pesquisa from '../../components/pesquisa/pesquisa';
 import { deleteProduct, getProduct } from '../../data/services/product.service';
 import Button from '../../components/button/button';
-import { useNavigate } from 'react-router-dom';
 import { Filters } from '../../interface/filters/product-filters.interface';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import Stepper from '../../components/stepper/stepper'; 
+import { toast } from 'react-toastify';
+import { queryClient } from '../../lib/react-query';
+import DialogComponent from '../../components/dialog/dialog';
+import CadastrarProduto from '../cadastrar-produto/cadastrar-produto';
 
 function Produto() {
-    const [data, setData] = useState<Record<string, string | number>[]>([]);
     const [selectedTable, setSelectedTable] = useState(0);
     const [filters, setFilters] = useState<Filters>({ name: '', size: '' });
-
-    useEffect(() => {
-        const getProdutos = async () => {
-            try {
-                const searchFilters = {
-                    ...(filters.name ? { name: filters.name } : {}),
-                    ...(filters.size ? { size: filters.size } : {})
-                };
-
-                const result = await getProduct(searchFilters);
-                setData(result);
-            } catch (error) {
-                console.error('Erro ao buscar produtos: ', error);
-            }
-        };
-      
-        getProdutos();
-
-    }, [filters]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedProductId, setSelectedProductId] = useState<string | number | null>(null);
+    const { data: products} = useQuery({
+        queryKey: ['product'],
+        queryFn: getProduct,
+    })
 
     const colunas: Coluna[] = [
         { header: 'Nome do produto', accessor: 'name' },
@@ -44,87 +34,106 @@ function Produto() {
         { header: 'Preço', accessor: 'price' },
     ];
 
-    const tableLabels = ['Todos', 'Receitas', 'Despesas'];
-
-    const filterFunctions = [
-        () => data,
-        () => data.filter(item => item.pagamento === 'Receita'),
-        () => data.filter(item => item.pagamento === 'Despesa'),
-    ];
-
-    const navigate = useNavigate();
+    const labels = ['Todos'];
 
     const handleClick = () => {
-        navigate('/cadastrar-produto');
+        setIsModalOpen(true);
+    };
+    
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedProductId(null);
+        getProdutoMutation.mutate();
     };
 
-    const handleEdit = (id: number | string) => {
-        navigate(`/cadastrar-produto/${id}`);
+    const handleEdit = (id: string | number) => {
+        setSelectedProductId(id);
+        setIsModalOpen(true);
     };
 
-    const deleteProduto = async (id: number | string): Promise<void> => {
-        if (typeof id === 'number') {
-            try {
-                setData((prevData) => prevData.filter((item) => item.id !== id));
-                await deleteProduct(id);
-            } catch (error) {
-                console.error("Erro ao deletar produto:", error);
+    const getProdutoMutation = useMutation({
+        mutationFn: getProduct,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['product'] });
+
+            if (selectedProductId) {
+                toast.success('Produto atualizado com sucesso!');
+            } else {
+                toast.success('Produto cadastrado com sucesso!');
             }
-        }
+        },
+        onError: () => {
+            toast.error('Erro ao obter produto.');
+        },
+    });
+
+    const deleteProdutoMutation = useMutation({
+        mutationFn: (id: number | string) => deleteProduct(id),
+        onSuccess: () => {
+            toast.error('Produto excluído com sucesso!');
+            queryClient.invalidateQueries({queryKey: ['product']});
+        },
+        onError: () => {
+            toast.error('Erro ao excluir o produto.');
+        },
+    });
+
+    const handleDelete = (id: string | number) => {
+        deleteProdutoMutation.mutate(id);
     };
 
     const handleFilterChange = (field: keyof Filters, value: string) => {
         setFilters((prevFilters) => ({ ...prevFilters, [field]: value }));
     };
-       
+
     return (
        <>
         <div className='container-produtos'>
-            <SideNav />
-            <div>
-                <Header date={new Date()} user={''} />
-                <div className='container-pesquisa-inputs'>
-                <Pesquisa 
-                        title='Produtos' 
-                        placeholder='Tamanho' 
-                        value={filters.size}
-                        onChange={(e) => handleFilterChange('size', e.target.value)}
-                        searchPlaceholder='Pesquisar' 
-                        searchValue={filters.name}
-                        searchChange={(e) => handleFilterChange('name', e.target.value)}
-                    />
-                    <Button className='botao-inputs' title='Novo produto' icon='Plus' onPress={handleClick} />
-                </div>
-                    <div className='container-stepper'>
-                    {tableLabels.map((label, index) => (
-                        <button className='button-stepper'
-                            key={label}
-                            onClick={() => setSelectedTable(index)}
-                            style={{color: selectedTable === index ? '#FF698D' : '#525256', }}>
-                            {label}
-                        </button>
-                ))}    
-                    </div>
-                <Box>
-                    <Table titleModal='produto' columns={colunas} data={filterFunctions[selectedTable]()} onDelete={deleteProduto} onEdit={handleEdit} />
-                </Box>
-                <div className='container-paginator'>
-                    <Pagination 
-                        count={10} 
-                        color='secondary'
-                        variant='outlined'
-                        size='small' 
-                        shape='circular'
-                        sx={{
-                            '& .MuiPaginationItem-root': {
-                                borderRadius: '50%',
-                                width: '30px',
-                                height: '30px'
-                            }
-                        }} 
-                    />
-                </div>
+            <Header date={new Date()} user={''} />
+            <div className='container-pesquisa-inputs'>
+            <Pesquisa  
+                    title='Produtos' 
+                    placeholder='Tamanho' 
+                    value={filters.size}
+                    onChange={(e) => handleFilterChange('size', e.target.value)}
+                    searchPlaceholder='Pesquisar' 
+                    searchValue={filters.name}
+                    searchChange={(e) => handleFilterChange('name', e.target.value)}
+                />
+                <Button className='botao-inputs' title='Novo produto' icon='Plus' onPress={handleClick} />
             </div>
+            <div>
+                <Stepper labels={labels} selectedIndex={selectedTable} onStepChange={setSelectedTable} beforeColor='#FF698D' activeColor='#FF698D' />
+
+                {selectedTable === 0 && (
+                    <Table titleModal='produto' columns={colunas}  data={products}  onDelete={handleDelete} onEdit={handleEdit} />
+                )}
+            </div>
+            <div className='container-paginator'>
+                <Pagination 
+                    count={10} 
+                    color='secondary'
+                    variant='outlined'
+                    size='small' 
+                    shape='circular'
+                    sx={{
+                        '& .MuiPaginationItem-root': {
+                            borderRadius: '50%',
+                            width: '30px',
+                            height: '30px'
+                        }
+                    }} 
+                />
+            </div>
+
+                <DialogComponent
+                    closeButtonText="Cancelar"
+                    open={isModalOpen}
+                    onClose={() => handleCloseModal()}
+                    
+                >
+                    {isModalOpen && <CadastrarProduto onCloseModal={handleCloseModal} productId={selectedProductId}/>}
+                </DialogComponent>
            </div>
        </>
     )
