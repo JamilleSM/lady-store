@@ -7,6 +7,7 @@ import Financeiro from '../pages/financeiro/financeiro';
 import Estoque from '../pages/estoque/estoque';
 import Fornecedor from '../pages/fornecedor/fornecedor';
 import Login from '../pages/login/login';
+import Vendas from '../pages/vendas/vendas';
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return <div>{children}</div>;
@@ -55,6 +56,7 @@ const Rotas = () => {
               <Route path='/financeiro' element={<Financeiro />} />
               <Route path='/estoque' element={<Estoque />} />
               <Route path='/fornecedor' element={<Fornecedor />} />
+              <Route path='/vendas' element={<Vendas/>} />
             </Routes>
           </MainLayout>
         }

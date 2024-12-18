@@ -45,7 +45,7 @@ export function CarouselDemo() {
             >
               <div>
                 <CardContent className='flex aspect-square items-center justify-center'>
-                  <CarouselItem className='basis-3/3 pl-0 h-[200px]' style={{ margin: 0 }}>
+                  <CarouselItem className='basis-3/3 pl-0 h-[200px]' style={{ margin: 0}}>
                     <TotalBalance total={totalBalance}/>
                   </CarouselItem>
                 </CardContent>

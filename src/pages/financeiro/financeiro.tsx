@@ -16,7 +16,7 @@ import DialogComponent from '../../components/dialog/dialog';
 
 function Financeiro() {
     const [selectedTable, setSelectedTable] = useState(0);
-    const [filters, setFilters] = useState<Filters>({ name: '', size: '' });
+    const [filters, setFilters] = useState<Filters>({ name: '', type: '' });
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedSupplierId, setSelectedSupplierId] = useState<string | number | null>(null);
     const { data: financials} = useQuery({
